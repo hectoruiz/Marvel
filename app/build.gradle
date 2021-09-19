@@ -1,17 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
-    compileSdk 31
+    compileSdk rootProject.compileSdkVersion
 
     defaultConfig {
         applicationId "hector.ruiz.marvel"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.minSdkVersion
+        targetSdk rootProject.targetSdkVersion
+        versionCode rootProject.versionCodeVersion
+        versionName rootProject.versionNameVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,21 +25,53 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility rootProject.javaVersion
+        targetCompatibility rootProject.javaVersion
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = rootProject.jvmTargetVersion
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    packagingOptions {
+        resources.excludes += "DebugProbesKt.bin"
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation project(':usecase')
+    implementation project(':data')
+    implementation project(':datasource')
+    implementation project(':domain')
+    implementation project(':commons')
+    implementation project(':presentation')
+
+    // Android Libraries
+    implementation "androidx.core:core-ktx:$rootProject.coreKtxVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.extensionsVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofitVersion"
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.daggerHiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.daggerHiltVersion"
+
+    // Testing libraries
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.testJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
 }
