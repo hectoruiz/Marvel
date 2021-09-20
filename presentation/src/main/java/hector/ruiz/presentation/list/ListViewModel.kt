@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hector.ruiz.usecase.usecases.GetCharacters
+import hector.ruiz.usecase.usecases.GetCharactersUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val getCharacters: GetCharacters) : ViewModel() {
+class ListViewModel @Inject constructor(private val getCharactersUseCase: GetCharactersUseCase) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()
@@ -33,7 +33,7 @@ class ListViewModel @Inject constructor(private val getCharacters: GetCharacters
     fun getCharacterList() =
         viewModelScope.launch(exceptionHandler) {
             _isLoading.postValue(true)
-            val result = getCharacters()
+            val result = getCharactersUseCase()
             result.data?.let {
                 _characterList.postValue(listOf(it))
                 _isLoading.postValue(false)

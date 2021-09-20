@@ -36,6 +36,9 @@ ext {
     // Coroutines
     coroutinesVersion = "1.5.2"
 
+    // OkHttp3
+    okHttpVersion = "4.9.1"
+
     // Testing Libraries
     junitVersion = "4.13.2"
     testJunitVersion = "1.1.3"

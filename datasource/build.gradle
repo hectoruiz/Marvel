@@ -14,6 +14,11 @@ android {
         versionName rootProject.versionNameVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        resValue "string", "marvel_api_public_key", properties.getProperty("MARVEL_API_PUBLIC_KEY", "")
+        resValue "string", "marvel_api_private_key", properties.getProperty("MARVEL_API_PRIVATE_KEY", "")
     }
 
     compileOptions {
@@ -35,6 +40,10 @@ dependencies {
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$rootProject.daggerHiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$rootProject.daggerHiltVersion"
+
+    // OkHttp3
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okHttpVersion"
 
     // Testing libraries
     testImplementation "junit:junit:$rootProject.junitVersion"
