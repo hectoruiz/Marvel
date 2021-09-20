@@ -1,6 +1,7 @@
 package hector.ruiz.marvel.ui.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +34,12 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         GlobalScope.launch {
-            getCharactersUseCase()
+            getCharactersUseCase().data?.charactersData?.characterList?.forEach { character ->
+                character?.name?.let { name ->
+                    Log.d("Character Name", name)
+                }
+            }
         }
-
     }
 
     override fun onDestroyView() {
