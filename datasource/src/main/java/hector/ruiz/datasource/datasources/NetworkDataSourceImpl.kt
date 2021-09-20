@@ -3,6 +3,7 @@ package hector.ruiz.datasource.datasources
 import hector.ruiz.commons.ResponseResult
 import hector.ruiz.data.datasources.NetworkDataSource
 import hector.ruiz.datasource.api.ApiService
+import hector.ruiz.domain.ResponseData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -13,11 +14,11 @@ class NetworkDataSourceImpl @Inject constructor(retrofit: Retrofit) : NetworkDat
 
     private val service = retrofit.create<ApiService>()
 
-    override suspend fun getCharacters(): ResponseResult<Any> {
+    override suspend fun getCharacters(): ResponseResult<ResponseData> {
         return withContext(Dispatchers.IO) {
             service.getCharacters().let {
                 if (it.isSuccessful) {
-                    ResponseResult(null, it)
+                    ResponseResult(null, it.body())
                 } else {
                     ResponseResult(it.code(), null)
                 }
@@ -25,11 +26,11 @@ class NetworkDataSourceImpl @Inject constructor(retrofit: Retrofit) : NetworkDat
         }
     }
 
-    override suspend fun getCharacter(characterId: Int): ResponseResult<Any> {
+    override suspend fun getCharacter(characterId: Int): ResponseResult<ResponseData> {
         return withContext(Dispatchers.IO) {
             service.getCharacter(characterId).let {
                 if (it.isSuccessful) {
-                    ResponseResult(null, it)
+                    ResponseResult(null, it.body())
                 } else {
                     ResponseResult(it.code(), null)
                 }
