@@ -8,4 +8,6 @@ interface NetworkDataSource {
     suspend fun getCharacters(): ResponseResult<ResponseData>
 
     suspend fun getCharacter(characterId: Int): ResponseResult<ResponseData>
+
+    suspend fun getAppearances(url: String): ResponseResult<ResponseData>
 }

@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
+import hector.ruiz.marvel.ui.detail.AppearancesAdapter
 import hector.ruiz.marvel.ui.list.CharacterAdapter
 
 @Module
@@ -14,5 +15,10 @@ object FragmentModule {
     @Provides
     fun providerCharacterAdapter(picasso: Picasso): CharacterAdapter {
         return CharacterAdapter(picasso)
+    }
+
+    @Provides
+    fun providerAppearancesAdapter(picasso: Picasso): AppearancesAdapter {
+        return AppearancesAdapter(picasso)
     }
 }

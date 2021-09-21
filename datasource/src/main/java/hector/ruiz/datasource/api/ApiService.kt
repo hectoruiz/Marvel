@@ -15,7 +15,13 @@ interface ApiService {
         @Path(CHARACTER_ID) characterId: Int
     ): Response<ResponseData>
 
+    @GET("{$APPEARANCE_URL}")
+    suspend fun getAppearances(
+        @Path(value = APPEARANCE_URL, encoded = true) url: String
+    ): Response<ResponseData>
+
     private companion object {
         const val CHARACTER_ID = "characterId"
+        const val APPEARANCE_URL = "appearanceUrl"
     }
 }

@@ -51,14 +51,6 @@
                     tools:text="SpiderMan" />
 
                 <TextView
-                    android:id="@+id/characterEpisodes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_parent"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    tools:text="This character appears in 12 episodes." />
-
-                <TextView
                     android:id="@+id/characterDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,8 +62,7 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_parent">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/characterDetail"

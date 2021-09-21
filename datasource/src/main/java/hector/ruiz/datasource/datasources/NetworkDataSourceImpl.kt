@@ -37,4 +37,16 @@ class NetworkDataSourceImpl @Inject constructor(retrofit: Retrofit) : NetworkDat
             }
         }
     }
+
+    override suspend fun getAppearances(url: String): ResponseResult<ResponseData> {
+        return withContext(Dispatchers.IO) {
+            service.getAppearances(url).let {
+                if (it.isSuccessful) {
+                    ResponseResult(null, it.body())
+                } else {
+                    ResponseResult(it.code(), null)
+                }
+            }
+        }
+    }
 }

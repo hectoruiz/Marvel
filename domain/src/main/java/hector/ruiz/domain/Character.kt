@@ -14,5 +14,6 @@ data class Character(
     val series: Detail?,
     val stories: Detail?,
     val events: Detail?,
-    val urls: List<Urls?>?
+    val urls: List<Urls?>?,
+    val title: String?
 )
