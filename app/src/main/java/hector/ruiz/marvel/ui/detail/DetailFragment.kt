@@ -17,6 +17,7 @@ import hector.ruiz.domain.Detail
 import hector.ruiz.marvel.R
 import hector.ruiz.marvel.databinding.DetailCharacterBinding
 import hector.ruiz.marvel.extensions.loadImage
+import hector.ruiz.marvel.extensions.snackBarLong
 import hector.ruiz.presentation.detail.DetailViewModel
 import javax.inject.Inject
 
@@ -67,7 +68,7 @@ class DetailFragment : Fragment() {
                 picasso.loadImage(
                     character?.thumbnail,
                     this.characterDetailImage,
-                    characterDetailImageProgress
+                    this.characterDetailImageProgress
                 )
                 this.characterDetailName.text = character?.name
                 setUpButton(
@@ -99,6 +100,12 @@ class DetailFragment : Fragment() {
             appearancesAdapter.notifyItemRangeRemoved(0, appearancesAdapter.itemCount)
             appearancesAdapter.setAppearances(it)
             appearancesAdapter.notifyItemRangeInserted(0, it.size)
+        })
+
+        detailViewModel.errorRequest.observe(viewLifecycleOwner, {
+            if (it) {
+                snackBarLong(R.string.error_request)
+            }
         })
     }
 
