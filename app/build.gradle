@@ -70,6 +70,9 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$rootProject.daggerHiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$rootProject.daggerHiltVersion"
 
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+
     // Testing libraries
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testJunitVersion"

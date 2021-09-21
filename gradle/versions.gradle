@@ -39,6 +39,9 @@ ext {
     // OkHttp3
     okHttpVersion = "4.9.1"
 
+    // Picasso
+    picassoVersion = "2.8"
+
     // Testing Libraries
     junitVersion = "4.13.2"
     testJunitVersion = "1.1.3"

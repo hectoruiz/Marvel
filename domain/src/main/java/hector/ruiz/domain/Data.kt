@@ -9,5 +9,5 @@ data class Data(
     val limit: Int?,
     val total: Int?,
     val count: Int?,
-    @Json(name = "data") val characterList: List<Character?>?
+    @Json(name = "results") val characterList: List<Character?>?
 )
