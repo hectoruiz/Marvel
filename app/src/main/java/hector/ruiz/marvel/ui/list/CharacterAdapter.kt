@@ -39,7 +39,7 @@ class CharacterAdapter @Inject constructor(private val picasso: Picasso) :
                 picasso.loadImage(
                     character?.thumbnail,
                     this.characterImage,
-                    characterProgress
+                    this.characterProgress
                 )
                 this.characterName.text = character?.name
                 this.characterDescription.visibility =

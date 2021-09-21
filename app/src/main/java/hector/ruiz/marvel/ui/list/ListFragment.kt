@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import hector.ruiz.marvel.R
 import hector.ruiz.marvel.databinding.ListCharacterBinding
+import hector.ruiz.marvel.extensions.snackBarLong
 import hector.ruiz.presentation.list.ListViewModel
 import javax.inject.Inject
 
@@ -54,6 +56,12 @@ class ListFragment : Fragment() {
         listViewModel.characterList.observe(viewLifecycleOwner, {
             characterAdapter.setList(it)
             characterAdapter.notifyItemRangeInserted(characterAdapter.itemCount, it.size)
+        })
+
+        listViewModel.errorRequest.observe(viewLifecycleOwner, {
+            if (it) {
+                snackBarLong(R.string.error_request)
+            }
         })
     }
 

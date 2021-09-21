@@ -52,7 +52,7 @@ class DetailViewModel @Inject constructor(
 
     private fun manageError() {
         _isLoading.postValue(false)
-        if (_character.value == null) {
+        if (_character.value == null || _appearances.value.isNullOrEmpty()) {
             _errorRequest.postValue(true)
         }
     }
