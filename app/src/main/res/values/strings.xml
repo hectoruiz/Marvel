@@ -11,5 +11,6 @@
         <item quantity="one">%d comic.</item>
         <item quantity="other">%d comics.</item>
     </plurals>
+    <string name="character_details">Character details</string>
 
 </resources>

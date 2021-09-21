@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import hector.ruiz.marvel.databinding.ListCharacterBinding
 import hector.ruiz.presentation.list.ListViewModel
@@ -33,6 +34,12 @@ class ListFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding?.characterList?.adapter = characterAdapter
+        characterAdapter.onDetailClick = {
+            it?.let {
+                val action = ListFragmentDirections.actionListFragmentToDetailFragment(it)
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

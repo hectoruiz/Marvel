@@ -18,6 +18,7 @@ import javax.inject.Inject
 class CharacterAdapter @Inject constructor(private val picasso: Picasso) :
     RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
+    var onDetailClick: ((Int?) -> Unit)? = null
     private var characters: List<Character?> = emptyList()
 
     fun setList(characters: List<Character?>) {
@@ -26,6 +27,12 @@ class CharacterAdapter @Inject constructor(private val picasso: Picasso) :
 
     inner class CharacterViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemCharacterBinding.bind(view)
+
+        init {
+            binding.characterDetail.setOnClickListener {
+                onDetailClick?.invoke(characters[adapterPosition]?.id)
+            }
+        }
 
         fun bind(character: Character?) {
             with(binding) {
