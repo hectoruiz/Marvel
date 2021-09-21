@@ -6,10 +6,22 @@
     <string name="error_request">The request could not be done. Try again later.</string>
 
     <!-- Character item -->
-    <string name="character_comics">This character appears in %s</string>
-    <plurals name="number_episodes">
-        <item quantity="one">%d comic.</item>
-        <item quantity="other">%d comics.</item>
+    <string name="character_details">Character details</string>
+
+    <!-- Character detail -->
+    <string name="detail_button">Appears in %s</string>
+    <plurals name="number_comics">
+        <item quantity="one">%d comic</item>
+        <item quantity="other">%d comics</item>
+    </plurals>
+    <string name="detail_button_series">Appears in %d series</string>
+    <plurals name="number_stories">
+        <item quantity="one">%d story</item>
+        <item quantity="other">%d stories</item>
+    </plurals>
+    <plurals name="number_events">
+        <item quantity="one">%d event</item>
+        <item quantity="other">%d events</item>
     </plurals>
 
 </resources>

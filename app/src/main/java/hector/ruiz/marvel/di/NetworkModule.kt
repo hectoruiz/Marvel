@@ -5,8 +5,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hector.ruiz.data.datasources.NetworkDataSource
+import hector.ruiz.data.repositories.AppearancesRepositoryImpl
 import hector.ruiz.data.repositories.CharacterRepositoryImpl
 import hector.ruiz.datasource.datasources.NetworkDataSourceImpl
+import hector.ruiz.usecase.repositories.AppearancesRepository
 import hector.ruiz.usecase.repositories.CharacterRepository
 import retrofit2.Retrofit
 
@@ -22,5 +24,10 @@ object NetworkModule {
     @Provides
     fun providerCharacterRepository(networkDataSource: NetworkDataSource): CharacterRepository {
         return CharacterRepositoryImpl(networkDataSource)
+    }
+
+    @Provides
+    fun providerAppearancesRepository(networkDataSource: NetworkDataSource): AppearancesRepository {
+        return AppearancesRepositoryImpl(networkDataSource)
     }
 }

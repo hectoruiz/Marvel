@@ -20,6 +20,10 @@
         android:name="hector.ruiz.marvel.ui.detail.DetailFragment"
         tools:layout="@layout/detail_character">
 
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_DetailFragment_to_ListFragment"
             app:destination="@id/ListFragment" />
