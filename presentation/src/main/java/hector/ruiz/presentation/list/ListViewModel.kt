@@ -5,13 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hector.ruiz.domain.Character
 import hector.ruiz.usecase.usecases.GetCharactersUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val getCharactersUseCase: GetCharactersUseCase) : ViewModel() {
+class ListViewModel @Inject constructor(private val getCharactersUseCase: GetCharactersUseCase) :
+    ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()
@@ -22,8 +24,8 @@ class ListViewModel @Inject constructor(private val getCharactersUseCase: GetCha
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _characterList: MutableLiveData<List<Any?>> = MutableLiveData()
-    val characterList: LiveData<List<Any?>>
+    private val _characterList: MutableLiveData<List<Character?>> = MutableLiveData()
+    val characterList: LiveData<List<Character?>>
         get() = _characterList
 
     private val _errorRequest: MutableLiveData<Boolean> = MutableLiveData()
@@ -34,8 +36,8 @@ class ListViewModel @Inject constructor(private val getCharactersUseCase: GetCha
         viewModelScope.launch(exceptionHandler) {
             _isLoading.postValue(true)
             val result = getCharactersUseCase()
-            result.data?.let {
-                _characterList.postValue(listOf(it))
+            result.data?.charactersData?.characterList?.let {
+                _characterList.postValue(it)
                 _isLoading.postValue(false)
             } ?: manageError()
         }

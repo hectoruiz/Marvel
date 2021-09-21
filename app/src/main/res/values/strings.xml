@@ -2,10 +2,14 @@
     <!-- App name -->
     <string name="app_name">Marvel</string>
 
-    <!-- Vehicle list -->
+    <!-- Character list -->
     <string name="error_request">The request could not be done. Try again later.</string>
-    <string name="error_location">The user location could not be retrieved.</string>
-    <string name="permission_location_rejected">The user location is needed to show how to arrive
-        to the vehicle.</string>
+
+    <!-- Character item -->
+    <string name="character_comics">This character appears in %s</string>
+    <plurals name="number_episodes">
+        <item quantity="one">%d comic.</item>
+        <item quantity="other">%d comics.</item>
+    </plurals>
 
 </resources>
