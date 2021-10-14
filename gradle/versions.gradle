@@ -44,6 +44,7 @@ ext {
 
     // Testing Libraries
     junitVersion = "4.13.2"
+    mockkVersion = "1.12.0"
     testJunitVersion = "1.1.3"
     espressoVersion = "3.4.0"
 }

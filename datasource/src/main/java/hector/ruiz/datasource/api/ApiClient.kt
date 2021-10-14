@@ -28,10 +28,11 @@ class ApiClient @Inject constructor(marvelInterceptor: MarvelInterceptor) {
         .readTimeout(TIMEOUT, TimeUnit.SECONDS)
         .build()
 
-    val retrofit: Retrofit.Builder = Retrofit.Builder()
+    val retrofit: Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
+        .build()
 
     private companion object {
         const val BASE_URL = "https://gateway.marvel.com/v1/public/"
