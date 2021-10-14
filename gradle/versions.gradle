@@ -1,7 +1,7 @@
 ext {
 
     // Plugins
-    gradlePluginVersion = "7.0.0"
+    gradlePluginVersion = "7.0.3"
     kotlinPluginVersion = "1.5.30"
 
     // App SDK Properties
