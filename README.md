@@ -15,5 +15,6 @@ Libraries used:
     - SafeArgs: For passing parameters through fragments using navigation.
     - ViewBinding: Linking the layouts with the views.
     - ViewModels: At the presentation layer.
-    
+- JUnit: On the unit tests execution.
+- Mockito: To mock instances on unit test processing.  
 - Used clean architecture with a modularized project.
