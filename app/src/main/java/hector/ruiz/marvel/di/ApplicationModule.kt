@@ -43,7 +43,7 @@ object ApplicationModule {
     @Provides
     @Singleton
     fun providerRetrofit(apiClient: ApiClient): Retrofit {
-        return apiClient.retrofit.build()
+        return apiClient.retrofit
     }
 
     @Provides
