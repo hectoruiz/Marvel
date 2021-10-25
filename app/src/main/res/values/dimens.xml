@@ -4,7 +4,6 @@
     <dimen name="margin_parent">8dp</dimen>
     <dimen name="margin_info_text">16dp</dimen>
     <dimen name="padding_info_text">16dp</dimen>
-    <dimen name="padding_text">8dp</dimen>
 
     <!-- Character item -->
     <dimen name="height_character_image">194dp</dimen>
