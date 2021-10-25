@@ -18,6 +18,7 @@ import hector.ruiz.marvel.R
 import hector.ruiz.marvel.databinding.DetailCharacterBinding
 import hector.ruiz.marvel.extensions.loadImage
 import hector.ruiz.marvel.extensions.snackBarLong
+import hector.ruiz.marvel.ui.AppearancesItemDecoration
 import hector.ruiz.presentation.detail.DetailViewModel
 import javax.inject.Inject
 
@@ -50,6 +51,13 @@ class DetailFragment : Fragment() {
             COLUMNS_NUMBER,
             RecyclerView.VERTICAL,
             false
+        )
+        binding?.characterDetailAppearancesList?.addItemDecoration(
+            AppearancesItemDecoration(
+                context?.resources?.getDimensionPixelSize(
+                    R.dimen.margin_parent
+                ) ?: DEFAULT_ITEM_OFFSET
+            )
         )
         binding?.characterDetailAppearancesList?.adapter = appearancesAdapter
     }
@@ -144,5 +152,6 @@ class DetailFragment : Fragment() {
 
     private companion object {
         const val COLUMNS_NUMBER = 2
+        const val DEFAULT_ITEM_OFFSET = 8
     }
 }
