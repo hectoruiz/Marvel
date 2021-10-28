@@ -4,6 +4,7 @@
 
     <!-- Character list -->
     <string name="error_request">The request could not be done. Try again later.</string>
+    <string name="retry_request">Retry</string>
 
     <!-- Character item -->
     <string name="character_details">Character details</string>

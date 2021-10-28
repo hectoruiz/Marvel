@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenStarted
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import hector.ruiz.marvel.R
 import hector.ruiz.marvel.databinding.ListCharacterBinding
+import hector.ruiz.marvel.extensions.snackBarIndefinite
 import hector.ruiz.marvel.extensions.snackBarLong
 import hector.ruiz.presentation.list.ListViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,7 +40,17 @@ class ListFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding?.characterList?.adapter = characterAdapter
+        binding?.characterList?.adapter =
+            characterAdapter.also {
+                it.addLoadStateListener { loadStates ->
+                    binding?.charactersProgress?.isVisible =
+                        loadStates.refresh is LoadState.Loading
+                    if (loadStates.refresh is LoadState.Error) {
+                        snackBarIndefinite(R.string.error_request)
+                    }
+                }
+            }.withLoadStateFooter(CharacterLoadStateAdapter { characterAdapter.retry() })
+
         characterAdapter.onDetailClick = {
             it?.let {
                 val action = ListFragmentDirections.actionListFragmentToDetailFragment(it)
@@ -47,22 +62,13 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listViewModel.getCharacterList()
-
-        listViewModel.isLoading.observe(viewLifecycleOwner, {
-            binding?.charactersProgress?.isVisible = it
-        })
-
-        listViewModel.characterList.observe(viewLifecycleOwner, {
-            characterAdapter.setList(it)
-            characterAdapter.notifyItemRangeInserted(characterAdapter.itemCount, it.size)
-        })
-
-        listViewModel.errorRequest.observe(viewLifecycleOwner, {
-            if (it) {
-                snackBarLong(R.string.error_request)
+        viewLifecycleOwner.lifecycleScope.launch {
+            whenStarted {
+                listViewModel.characterList.observe(viewLifecycleOwner, {
+                    characterAdapter.submitData(lifecycle, it)
+                })
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

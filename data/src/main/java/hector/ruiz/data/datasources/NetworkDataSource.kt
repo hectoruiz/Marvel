@@ -5,7 +5,7 @@ import hector.ruiz.domain.ResponseData
 
 interface NetworkDataSource {
 
-    suspend fun getCharacters(): ResponseResult<ResponseData>
+    suspend fun getCharacters(pageNumber: Int): ResponseResult<ResponseData>
 
     suspend fun getCharacter(characterId: Int): ResponseResult<ResponseData>
 

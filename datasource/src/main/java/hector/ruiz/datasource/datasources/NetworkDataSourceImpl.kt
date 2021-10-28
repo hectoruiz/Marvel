@@ -6,17 +6,14 @@ import hector.ruiz.datasource.api.ApiService
 import hector.ruiz.domain.ResponseData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Inject
 
-class NetworkDataSourceImpl @Inject constructor(retrofit: Retrofit) : NetworkDataSource {
+class NetworkDataSourceImpl @Inject constructor(private val apiService: ApiService) :
+    NetworkDataSource {
 
-    private val service = retrofit.create<ApiService>()
-
-    override suspend fun getCharacters(): ResponseResult<ResponseData> {
+    override suspend fun getCharacters(pageNumber: Int): ResponseResult<ResponseData> {
         return withContext(Dispatchers.IO) {
-            service.getCharacters().let {
+            apiService.getCharacters(pageNumber).let {
                 if (it.isSuccessful) {
                     ResponseResult(null, it.body())
                 } else {
@@ -28,7 +25,7 @@ class NetworkDataSourceImpl @Inject constructor(retrofit: Retrofit) : NetworkDat
 
     override suspend fun getCharacter(characterId: Int): ResponseResult<ResponseData> {
         return withContext(Dispatchers.IO) {
-            service.getCharacter(characterId).let {
+            apiService.getCharacter(characterId).let {
                 if (it.isSuccessful) {
                     ResponseResult(null, it.body())
                 } else {
@@ -40,7 +37,7 @@ class NetworkDataSourceImpl @Inject constructor(retrofit: Retrofit) : NetworkDat
 
     override suspend fun getAppearances(url: String): ResponseResult<ResponseData> {
         return withContext(Dispatchers.IO) {
-            service.getAppearances(url).let {
+            apiService.getAppearances(url).let {
                 if (it.isSuccessful) {
                     ResponseResult(null, it.body())
                 } else {

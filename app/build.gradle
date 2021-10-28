@@ -61,6 +61,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.extensionsVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"

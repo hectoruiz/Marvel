@@ -9,10 +9,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import hector.ruiz.datasource.api.ApiClient
+import hector.ruiz.datasource.api.ApiService
 import hector.ruiz.datasource.interceptors.MarvelInterceptor
 import hector.ruiz.marvel.R
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -44,6 +46,12 @@ object ApplicationModule {
     @Singleton
     fun providerRetrofit(apiClient: ApiClient): Retrofit {
         return apiClient.retrofit
+    }
+
+    @Provides
+    @Singleton
+    fun providerApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create()
     }
 
     @Provides

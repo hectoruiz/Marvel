@@ -28,9 +28,9 @@ class CharacterRepositoryImplTest {
     fun `characterRepositoryImpl requesting getCharacters`() {
         val responseData = mockk<ResponseResult<ResponseData>>(relaxed = true)
 
-        coEvery { networkDataSource.getCharacters() } returns responseData
+        coEvery { networkDataSource.getCharacters(PAGE_NUMBER) } returns responseData
         val result = runBlocking {
-            characterRepositoryImpl.getCharacters()
+            characterRepositoryImpl.getCharacters(PAGE_NUMBER)
         }
 
         assertEquals(responseData, result)
@@ -49,6 +49,7 @@ class CharacterRepositoryImplTest {
     }
 
     private companion object {
+        const val PAGE_NUMBER = 2
         const val CHARACTER_ID = 4
     }
 }
