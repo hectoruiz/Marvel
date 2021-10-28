@@ -16,6 +16,7 @@ Simple app with a list with some characters from Marvel populated on a recyclerv
   - SafeArgs: For passing parameters through fragments using navigation.
   - ViewBinding: Linking the layouts with the views.
   - ViewModels: At the presentation layer.
+  - Paging: To handle the list pagination.
 - JUnit: On the unit tests execution.
 - Mockito: To mock instances on unit test processing.
 - Used clean architecture with a modularized project.
