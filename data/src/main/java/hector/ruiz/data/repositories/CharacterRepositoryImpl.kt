@@ -7,7 +7,8 @@ import javax.inject.Inject
 class CharacterRepositoryImpl @Inject constructor(private val networkDataSource: NetworkDataSource) :
     CharacterRepository {
 
-    override suspend fun getCharacters() = networkDataSource.getCharacters()
+    override suspend fun getCharacters(pageNumber: Int) =
+        networkDataSource.getCharacters(pageNumber)
 
     override suspend fun getCharacter(characterId: Int) =
         networkDataSource.getCharacter(characterId)

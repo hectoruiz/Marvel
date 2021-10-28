@@ -1,4 +1,4 @@
-package hector.ruiz.marvel.ui
+package hector.ruiz.marvel.ui.detail
 
 import android.graphics.Rect
 import android.view.View

@@ -18,7 +18,6 @@ import hector.ruiz.marvel.R
 import hector.ruiz.marvel.databinding.DetailCharacterBinding
 import hector.ruiz.marvel.extensions.loadImage
 import hector.ruiz.marvel.extensions.snackBarLong
-import hector.ruiz.marvel.ui.AppearancesItemDecoration
 import hector.ruiz.presentation.detail.DetailViewModel
 import javax.inject.Inject
 

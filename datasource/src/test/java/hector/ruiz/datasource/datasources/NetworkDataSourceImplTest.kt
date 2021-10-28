@@ -33,7 +33,7 @@ class NetworkDataSourceImplTest {
     private lateinit var apiService: ApiService
 
     private val networkDataSourceImpl by lazy {
-        NetworkDataSourceImpl(retrofit)
+        NetworkDataSourceImpl(apiService)
     }
 
     @Before
@@ -44,12 +44,12 @@ class NetworkDataSourceImplTest {
 
     @Test
     fun `error requesting getCharacters`() {
-        coEvery { apiService.getCharacters() } returns Response.error(
+        coEvery { apiService.getCharacters(PAGE_NUMBER) } returns Response.error(
             ERROR_CODE,
             mockk(relaxed = true)
         )
         val result = runBlocking {
-            networkDataSourceImpl.getCharacters()
+            networkDataSourceImpl.getCharacters(PAGE_NUMBER)
         }
 
         assertEquals(ERROR_CODE, result.errorCode)
@@ -59,9 +59,12 @@ class NetworkDataSourceImplTest {
     @Test
     fun `success requesting getCharacters`() {
         val responseData = mockk<ResponseData>()
-        coEvery { apiService.getCharacters() } returns Response.success(SUCCESS_CODE, responseData)
+        coEvery { apiService.getCharacters(PAGE_NUMBER) } returns Response.success(
+            SUCCESS_CODE,
+            responseData
+        )
         val result = runBlocking {
-            networkDataSourceImpl.getCharacters()
+            networkDataSourceImpl.getCharacters(PAGE_NUMBER)
         }
 
         assertNull(result.errorCode)
@@ -129,6 +132,7 @@ class NetworkDataSourceImplTest {
     private companion object {
         const val ERROR_CODE = 400
         const val SUCCESS_CODE = 200
+        const val PAGE_NUMBER = 12
         const val CHARACTER_ID = 12
         const val APPEARANCE_URL = "http://blablabla.com"
     }

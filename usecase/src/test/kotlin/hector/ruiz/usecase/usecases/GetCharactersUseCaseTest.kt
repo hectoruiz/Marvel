@@ -27,10 +27,14 @@ class GetCharactersUseCaseTest {
     @Test
     fun `getCharactersUseCase request getCharacters`() {
         val responseData = mockk<ResponseResult<ResponseData>>()
-        coEvery { characterRepository.getCharacters() } returns responseData
+        coEvery { characterRepository.getCharacters(PAGE_NUMBER) } returns responseData
 
-        val result = runBlocking { getCharactersUseCase() }
+        val result = runBlocking { getCharactersUseCase(PAGE_NUMBER) }
 
         assertEquals(responseData, result)
+    }
+
+    private companion object {
+        const val PAGE_NUMBER = 2
     }
 }
