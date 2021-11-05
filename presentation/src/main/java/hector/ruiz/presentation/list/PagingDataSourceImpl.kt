@@ -23,8 +23,12 @@ class PagingDataSourceImpl @Inject constructor(private val getCharactersUseCase:
                     LoadResult.Page(
                         data = responseList ?: emptyList(),
                         prevKey = null,
-                        nextKey = responseResult.data?.charactersData?.run {
-                            offset?.plus(limit ?: DEFAULT_PAGE_SIZE)
+                        nextKey = if (responseList.isNullOrEmpty()) {
+                            null
+                        } else {
+                            responseResult.data?.charactersData?.run {
+                                offset?.plus(limit ?: DEFAULT_PAGE_SIZE)
+                            }
                         }
                     )
                 }
